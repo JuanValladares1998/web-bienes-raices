@@ -1,0 +1,102 @@
+.anuncios {
+    padding: 4rem 0 8rem 0;
+
+    .ver-mas {
+        display: flex;
+        justify-content: center;
+
+        .boton-ver-mas {
+            @include boton($gris, block);
+            margin-top: 2.4rem;
+        }
+
+        @include tablet {
+            justify-content: flex-end;
+
+            .boton-ver-mas {
+                display: inline-block;
+            }
+        }
+    }
+
+
+    .contenedor-anuncios {
+        margin-top: 3.2rem;
+
+        @include grid(1, 2rem);
+
+        @include tablet {
+            @include grid(2, 2rem);
+        }
+
+        @include desktop {
+            @include grid(3, 2rem);
+        }
+
+        .anuncio {
+            margin: 0 auto;
+            max-width: 38rem;
+            background-color: $blanco;
+            box-shadow: 0px 4px 5px 0px rgba($color: #000000, $alpha: .2);
+
+            img,
+            picture {
+                width: 100%;
+                display: block;
+            }
+
+            picture {
+                overflow: hidden;
+                height: 20rem;
+                display: flex;
+                align-items: center;
+            }
+
+            .contenido-anuncio {
+                padding: 1.6rem 2.4rem 3.2rem 2.4rem;
+
+                h3,
+                h4 {
+                    text-align: left;
+                }
+
+                p {
+                    margin-top: .8rem;
+                }
+
+                h4 {
+                    color: $amarillo;
+                    margin-top: 1.2rem;
+                }
+
+                .boton {
+                    margin-top: 1.6rem;
+                    @include boton($amarillo, block);
+                }
+
+                .iconos-caracteristicas {
+                    margin: 0;
+                    padding: 0;
+                    list-style: 0;
+                    @include grid(3, 0);
+
+                    li {
+                        display: flex;
+                        align-items: center;
+                        margin-top: 1.6rem;
+
+                        p {
+                            margin-bottom: .6rem;
+                        }
+
+                        img {
+                            height: 2.4rem;
+                            width: auto;
+                            margin-right: 1.6rem;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

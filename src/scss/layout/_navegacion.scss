@@ -1,0 +1,116 @@
+.barra {
+    display: flex;
+    flex-direction: column;
+    padding: 1.6rem 0 2.4rem 0;
+
+    img {
+        height: 4rem;
+    }
+
+    @include tablet {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .boton-menu {
+        z-index: 100;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: $marron;
+        width: 5.6rem;
+        height: 5.6rem;
+        border-radius: 50%;
+        position: fixed;
+        bottom: 3.2rem;
+        right: 3.2rem;
+
+        @include tablet {
+            display: none;
+        }
+    }
+
+    .derecha {
+
+        @include tablet {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .dark-mode-boton {
+            @media (max-width: $tablet) {
+                position: absolute;
+                top: 2.4rem;
+                right: 2.4rem;
+                z-index: 0;
+            }
+            cursor: pointer;
+            filter:invert(100%);
+            margin-left: 1.6rem;
+            height: 2.4rem;
+        }
+    }
+
+    .navegacion {
+
+        a {
+            color: $gris;
+            font-size: 1.6rem;
+            display: block;
+            text-align: center;
+            margin-right: 2.4rem;
+        }
+
+        @include tablet {
+            position: inherit;
+            background-color: transparent;
+
+            a {
+                color: $blanco;
+                font-size: 1.6rem;
+                display: block;
+                text-align: center;
+                margin-right: 2.4rem;
+
+                &:last-of-type {
+                    margin-right: 0;
+                }
+            }
+
+            display: flex;
+            align-items: center;
+        }
+
+
+        @media (max-width: $tablet) {
+            padding: .8rem 0;
+            top: 0;
+            left: 0;
+            position: fixed;
+            background-color: $blanco;
+            width: 100%;
+            box-shadow: 0px 4px 5px 0px rgba($color: #000000, $alpha: .2);
+            z-index: 100;
+
+            a {
+                padding: .8rem 2.4rem;
+                margin: 0;
+                text-align: left;
+                transition: all .3s ease;
+
+                &:hover {
+                    color: $blanco;
+                    background-color: $marron;
+                }
+            }
+        }
+    }
+
+    .hide {
+
+        @media (max-width: $tablet) {
+            display: none;
+        }
+    }
+}

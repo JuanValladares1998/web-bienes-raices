@@ -1,0 +1,37 @@
+.dark-mode {
+    background-color: darken($gris, 10);
+
+    .header {
+        background-color: lighten($marron, 10);
+    }
+
+    p,
+    h1,
+    h2,
+    h3,
+    h4,
+    label,
+    legend {
+        color: $blanco;
+    }
+
+    .contenido-anuncio {
+        background-color: darken($gris, 5);
+
+        img {
+            filter: invert(100%);
+        }
+    }
+
+    input,
+    textarea {
+        color: $blanco;
+        background-color: darken($gris, 10);
+    }
+
+    .testimonio,
+    .articulo,
+    .formulario-contacto {
+        background-color: darken($gris, 5);
+    }
+}

@@ -1,0 +1,2 @@
+.blog{gap:2.4rem;justify-content:space-between;padding:8rem 0}.blog,.blog .articulo{display:grid;grid-template-columns:1fr}.blog .articulo{box-shadow:0 4px 10px 0 rgba(0,0,0,.2)}.blog .articulo .imagen,.blog .articulo .imagen img,.blog .articulo .imagen picture{height:auto;width:100%}.blog .articulo .articulo-text{padding:2.4rem}.blog .articulo .articulo-text h4{text-align:left}.blog .articulo .articulo-text p{margin-top:2.4rem}
+/*# sourceMappingURL=blog.css.map */
