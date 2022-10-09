@@ -1,11 +1,46 @@
-.footer{
+.footer {
     background-color: $gris;
 
-    .contenedor-footer{
-        padding-top: 5.6rem;
+    .contenedor-footer {
+        padding: 5.6rem 0 4rem 0;
+        display: grid;
+        gap: 3.2rem;
+        grid-template-columns: 1fr;
+
+        @include tablet {
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+
+        .leyenda {
+            img {
+                height: 4rem;
+            }
+        }
+
+        .navegacion {
+            margin: 0 auto;
+
+            a {
+                color: $blanco;
+                font-size: 1.6rem;
+
+                &:last-of-type {
+                    margin-right: 0;
+                }
+            }
+
+            display: none;
+            flex-direction: column;
+            align-items: left;
+            justify-content: center;
+
+            @include tablet {
+                display: flex;
+            }
+        }
     }
 
-    .copyright{
+    .copy-right {
         text-align: center;
         font-size: 1.4rem;
         color: $blanco;
