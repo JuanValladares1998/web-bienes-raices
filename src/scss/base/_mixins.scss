@@ -32,6 +32,6 @@
     transition: all .2s ease;
 
     &:hover {
-        background-color: darken($color1, 10);
+        background-color: lighten($color1, 10);
     }
 }

@@ -95,3 +95,11 @@ h5 {
         line-height: 1.5;
     }
 }
+
+.boton_anar {
+    @include boton($amarillo, inline-block);
+}
+
+.seccion {
+    padding: 4rem 0;
+}
