@@ -1,0 +1,10 @@
+.alerta {
+    &.error{
+        background-color: none;
+        border: solid .2rem $rojo;
+        margin: .8rem 0;
+        padding: .8rem 1.6rem;
+        color: $rojo;
+        font-weight: bold;
+    }
+}
