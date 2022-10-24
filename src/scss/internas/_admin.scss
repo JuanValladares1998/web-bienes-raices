@@ -7,4 +7,13 @@
         color: $rojo;
         font-weight: bold;
     }
+
+    &.exito{
+        background-color: none;
+        border: solid .2rem $verde;
+        margin: .8rem 0;
+        padding: .8rem 1.6rem;
+        color: $verde;
+        font-weight: bold;
+    }
 }

@@ -24,20 +24,29 @@ $vendedorId = "";
 //Ejecutar el metodo POST del formulario
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
+    // echo "<pre>";
+    // var_dump($_POST);
+    // echo "</pre>";
 
-
-    exit;
+    // echo "<pre>";
+    // var_dump($_FILES); //super global para subir archivos por formulario
+    // echo "</pre>";
 
     //Obtener datos del formulario
-    $titulo = mysqli_real_escape_string($_POST["titulo"]);
-    $precio = mysqli_real_escape_string($_POST["precio"]);
-    $descripcion = mysqli_real_escape_string($_POST["descripcion"]);
-    $habitaciones = mysqli_real_escape_string($_POST["habitaciones"]);
-    $wc = mysqli_real_escape_string($_POST["wc"]);
-    $estacionamiento = mysqli_real_escape_string($_POST["estacionamiento"]);
-    $vendedorId = mysqli_real_escape_string($_POST["vendedor"]);
+    //La funcion mysqli_real_escape_string sanitiza los datos antes de ingrearlos a la base de datos
+    $titulo = mysqli_real_escape_string($db, $_POST["titulo"]);
+    $precio = mysqli_real_escape_string($db, $_POST["precio"]);
+    $descripcion = mysqli_real_escape_string($db, $_POST["descripcion"]);
+    $habitaciones = mysqli_real_escape_string($db, $_POST["habitaciones"]);
+    $wc = mysqli_real_escape_string($db, $_POST["wc"]);
+    $estacionamiento = mysqli_real_escape_string($db, $_POST["estacionamiento"]);
+    $vendedorId = mysqli_real_escape_string($db, $_POST["vendedor"]);
     $creado = date("Y/m/d");
 
+    $imagen = $_FILES["imagen"];
+
+
+    //Matriz de errores si falta agregar algun valor al formulario
     if (!$titulo) {
         $errores[] = "Debes añadir un título";
     }
@@ -60,21 +69,45 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $errores[] = "Debes elegir un vendedor";
     }
 
+    //Validar imagen
+    if (!$imagen["name"] || $imagen["error"]) {
+        $errores[] = "La imagen es obligatoria";
+    }
+
+    //Validar por tamaño (1M máximo)
+    $medida = 1000 * 1000;
+
+    if ($imagen["size"] > $medida) {
+        $errores[] = "La imagen es muy pesada";
+    }
 
     //Revisar que el arreglo de errores este vacio
-
     if (empty($errores)) {
 
-        //Insertar en la base de datos
-        $query = "INSERT INTO propiedades (titulo, precio, descripcion, habitaciones, wc, estacionamiento, creado, vendedores_id) VALUES ('$titulo', '$precio', '$descripcion', '$habitaciones', '$wc', '$estacionamiento', '$creado', '$vendedorId')";
+        /** Subida de archivos **/
+        $carpetaImagenes = "../../imagenes";
 
+        if (!is_dir($carpetaImagenes)) { // la funcion is_dir() revisa si existe una carpeta en el directorio
+            mkdir($carpetaImagenes); // la funcion mkdir() crea una carpeta
+        }
+
+        // Generar un nombre único
+        $nombreImagen = md5(uniqid(rand(), true)) . ".jpg";
+
+        //Subir la imagen
+        move_uploaded_file($imagen["tmp_name"], $carpetaImagenes . "/" . $nombreImagen);
+
+        //Crear insercion para la base de datos
+        $query = "INSERT INTO propiedades (titulo, precio, imagen, descripcion, habitaciones, wc, estacionamiento, creado, vendedores_id) VALUES ('$titulo', '$precio', '$nombreImagen', '$descripcion', '$habitaciones', '$wc', '$estacionamiento', '$creado', '$vendedorId')";
+
+        //Agregar la informacion a la base de datos
         $resultado = mysqli_query($db, $query);
 
         if ($resultado) {
             //Redireccionar al usuario
 
             //la funcion header para redireccionar se debe usar antes del HTML
-            header("Location: /admin");
+            header("Location: /admin?resultado=1");
         }
     }
 }
@@ -91,6 +124,8 @@ incluirTemplate('header') ?>
     <h1>Crear</h1>
 
     <a href="/admin" class="boton_anar">Volver</a>
+
+    <!-- Errores de llenado del formulario -->
     <?php foreach ($errores as $error) : ?>
         <div class="alerta error">
             <?php echo $error; ?>
@@ -98,7 +133,9 @@ incluirTemplate('header') ?>
     <?php endforeach; ?>
 
 
-    <form class="formulario-contacto" action="/admin/propiedades/crear.php" method="POST">
+    <form class="formulario-contacto" action="/admin/propiedades/crear.php" method="POST" enctype="multipart/form-data">
+        <!-- enctype="multipart/form-data" sirve para subir archivos al servidor -->
+
         <fieldset>
             <legend>Informacion General</legend>
             <div class="input-formulario">
