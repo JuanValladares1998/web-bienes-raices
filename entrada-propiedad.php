@@ -1,33 +1,39 @@
 <?php
 require "includes/funciones.php";
+require "includes/config/database.php";
+$db = conectarBD();
+
+$id = $_GET["id"];
+$id = filter_var($id, FILTER_VALIDATE_INT);
+
+if (!$id) {
+    header("Location: /");
+}
+
+$query = "SELECT * FROM propiedades WHERE id = ${id}";
+$resultado = mysqli_query($db, $query);
+$propiedad = mysqli_fetch_assoc($resultado);
+
+
+
 $inicio = true;
 incluirTemplate('header') ?>
 
 <main class="contenedor">
     <div class="marcador-pagina">
-        <h1>Propiedades >> Casa de Lujo en el Lago >></h1>
+        <h1>Propiedades >> <?php echo $propiedad["titulo"] ?> >></h1>
     </div>
     <section class="entrada">
-        <h2>Casa de Lujo en el Lago
+        <h2><?php echo $propiedad["titulo"] ?>
             <hr>
         </h2>
-        <picture>
-            <source srcset="./build/img/anuncio1.webp" type="image/webp">
-            <img loading="lazy" width="200" height="300" src="./build/img/anuncio1.jpg" alt="">
-        </picture>
+        <img loading="lazy" width="200" height="300" src="/imagenes/<?php echo $propiedad["imagen"] ?>" alt="<?php echo $propiedad["titulo"] ?>">
         <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti corrupti suscipit sit eveniet placeat
-            temporibus. Culpa fugiat vero vitae voluptatum repellat ab nihil nobis dolores vel tempore officiis
-            libero modi obcaecati architecto beatae quas, eveniet optio, distinctio nam aperiam? Minus, laborum esse
-            placeat ut numquam deleniti et facilis consectetur veniam, vitae velit sunt reiciendis ab sed odit fuga,
-            modi totam earum fugit rerum debitis! Tempore eius impedit, ad ut amet quia voluptate enim maiores
-            dignissimos illum voluptatem, commodi iusto debitis, recusandae atque accusamus eveniet praesentium
-            mollitia velit. Magni nostrum id dolorem, ducimus nesciunt aspernatur qui eveniet, deserunt laboriosam
-            cupiditate vitae. Doloremque ducimus quaerat odit laudantium similique! Porro animi tempora vitae
-            dolorem nesciunt. Nobis facilis sequi praesentium aliquam beatae magni. Eos?
+            <?php echo $propiedad["descripcion"] ?>
         </p>
     </section>
 </main>
 
 <?php
+mysqli_close($db);
 incluirTemplate('footer')  ?>

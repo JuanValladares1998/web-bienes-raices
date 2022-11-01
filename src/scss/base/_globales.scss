@@ -103,3 +103,14 @@ h5 {
 .seccion {
     padding: 4rem 0;
 }
+
+.btn-rojo{
+    font-family: $fuente2;
+    @include boton($rojo, block);
+    width: 100%;
+    border: none;
+}
+
+.btn-verde{
+    @include boton($verde, block);
+}

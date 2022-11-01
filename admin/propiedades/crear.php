@@ -85,7 +85,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (empty($errores)) {
 
         /** Subida de archivos **/
-        $carpetaImagenes = "../../imagenes";
+        $carpetaImagenes = "../../imagenes/";
 
         if (!is_dir($carpetaImagenes)) { // la funcion is_dir() revisa si existe una carpeta en el directorio
             mkdir($carpetaImagenes); // la funcion mkdir() crea una carpeta
@@ -95,7 +95,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $nombreImagen = md5(uniqid(rand(), true)) . ".jpg";
 
         //Subir la imagen
-        move_uploaded_file($imagen["tmp_name"], $carpetaImagenes . "/" . $nombreImagen);
+        move_uploaded_file($imagen["tmp_name"], $carpetaImagenes . $nombreImagen);
 
         //Crear insercion para la base de datos
         $query = "INSERT INTO propiedades (titulo, precio, imagen, descripcion, habitaciones, wc, estacionamiento, creado, vendedores_id) VALUES ('$titulo', '$precio', '$nombreImagen', '$descripcion', '$habitaciones', '$wc', '$estacionamiento', '$creado', '$vendedorId')";
@@ -121,7 +121,7 @@ incluirTemplate('header') ?>
 
 
 <main class="contenedor seccion">
-    <h1>Crear</h1>
+    <h1>Crear Propiedad</h1>
 
     <a href="/admin" class="boton_anar">Volver</a>
 
