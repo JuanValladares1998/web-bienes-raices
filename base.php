@@ -4,7 +4,7 @@ incluirTemplate('header') ?>
 
 
 <main class="contenedor">
-    <h1>Titulo Página</h1>
+    <h1 class="titulo-pagina">Iniciar Sesión</h1>
 </main>
 
 <?php

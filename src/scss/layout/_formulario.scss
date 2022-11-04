@@ -38,34 +38,36 @@
         padding-bottom: 3.2rem;
     }
 
-    .input-formulario {
 
-        display: flex;
-        flex-direction: column;
-        margin-top: 1.6rem;
-
-        input,
-        select,
-        textarea {
-            resize: none;
-            padding: .8rem;
-        }
-    }
-    textarea{
+    textarea {
         height: 16rem;
     }
 
     p {
         margin-top: 1.6rem;
     }
+}
 
-    .boton-enviar {
-        cursor: pointer;
-        margin-top: 2.4rem;
-        border: none;
-        font-family: $fuente2;
-        text-transform: uppercase;
-        @include boton($amarillo, inline-block);
-        padding: 1.6rem 3.2rem;
+.boton-enviar {
+    cursor: pointer;
+    margin-top: 2.4rem;
+    border: none;
+    font-family: $fuente2;
+    text-transform: uppercase;
+    @include boton($amarillo, inline-block);
+    padding: 1.6rem 3.2rem;
+}
+
+.input-formulario {
+
+    display: flex;
+    flex-direction: column;
+    margin-top: 1.6rem;
+
+    input,
+    select,
+    textarea {
+        resize: none;
+        padding: .8rem;
     }
 }

@@ -1,8 +1,16 @@
 <?php
+
+
+
 require "../includes/funciones.php";
 require "../includes/config/database.php";
 incluirTemplate('header');
 $db = conectarBD();
+$auth = estadoAutenticado();
+
+if (!$auth) {
+    header("Location: /");
+}
 
 //Importar la conexión
 $query = "SELECT * FROM propiedades";

@@ -1,10 +1,17 @@
 <?php
 
 //conectar a la base de datos
+require "../../includes/funciones.php";
 require "../../includes/config/database.php";
 
 //Conectarse a la base de datos
 $db = conectarBD();
+
+$auth = estadoAutenticado();
+
+if (!$auth) {
+    header("Location: /");
+}
 
 //Consultando los vendedores
 $consulta = "SELECT * FROM vendedores";
@@ -116,7 +123,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 
 //Funciones para el header
-require "../../includes/funciones.php";
 incluirTemplate('header') ?>
 
 

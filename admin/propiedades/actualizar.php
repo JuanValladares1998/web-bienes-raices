@@ -1,4 +1,13 @@
 <?php
+require "../../includes/funciones.php";
+require "../../includes/config/database.php";
+
+$auth = estadoAutenticado();
+
+if (!$auth) {
+    header("Location: /");
+}
+
 // Validar la URL por id valido
 $id = $_GET["id"];
 $id = filter_var($id, FILTER_VALIDATE_INT);
@@ -10,7 +19,6 @@ if (!$id) {
 
 
 //conectar a la base de datos
-require "../../includes/config/database.php";
 
 //Conectarse a la base de datos
 $db = conectarBD();
@@ -141,7 +149,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 
 //Funciones para el header
-require "../../includes/funciones.php";
 incluirTemplate('header') ?>
 
 

@@ -38,6 +38,12 @@ hr {
     margin: 0 auto;
 }
 
+.contenedor-estrecho {
+    margin: 6rem auto;
+    width: 95%;
+    max-width: 60rem;
+}
+
 a,
 p {
     font-family: $fuente2;
@@ -104,13 +110,17 @@ h5 {
     padding: 4rem 0;
 }
 
-.btn-rojo{
+.btn-rojo {
     font-family: $fuente2;
     @include boton($rojo, block);
     width: 100%;
     border: none;
 }
 
-.btn-verde{
+.btn-verde {
     @include boton($verde, block);
+}
+
+.titulo-pagina {
+    margin-top: 2.4rem;
 }
